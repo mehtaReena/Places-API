@@ -1,4 +1,4 @@
-
+const { nanoid } = require('nanoid')
 const Place = require('../models/place');
 
 
