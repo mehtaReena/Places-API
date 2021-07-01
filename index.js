@@ -5,6 +5,15 @@ const app =express();
 app.use(morgan('dev'));
 
 
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+app.use(morgan("dev"))
+
+const placeRouter = require('./routes/place')
+
+app.use('/places', placeRouter)
+
+
 mongoose.connect('mongodb://127.0.0.1:27017/PlacesDB', {
     useNewUrlParser: true,
     useUnifiedTopology: true,

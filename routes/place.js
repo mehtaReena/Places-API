@@ -12,7 +12,7 @@ router.get('/', async (req, res) => {
 })
 
 router.get('/:slug', async (req, res) => {
-    let result = await placeController.findPlace(req.params.slug)
+    let result = await placeController.getPlace(req.params.slug)
     if (result.status) {
         res.status(200).send(result.result)
     }
@@ -20,7 +20,8 @@ router.get('/:slug', async (req, res) => {
 })
 
 router.post('/', async (req, res) => {
-    let result = await placeController.addPlace(req.body)
+    console.log(" create place" ,req.body)
+    let result = await placeController.createPlace(req.body)
     if (result.status) {
         res.status(201).send(result.result)
     }

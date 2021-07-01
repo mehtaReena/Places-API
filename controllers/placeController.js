@@ -19,10 +19,12 @@ const getPlace= async (slug) => {
     }
 
 
+
 }
 
 
 const createPlace = async (place) => {
+    console.log(place)
     let slug = place.name.replace(" ", "-") + "-" + nanoid(6);
     let newPlace = new Place({ ...place, slug });
     try {
@@ -33,6 +35,22 @@ const createPlace = async (place) => {
     }
 
 }
+
+const placesList = async (query) => {
+    try {
+      let places;
+      if (query.name) {
+          places = await Place.find({ name: { "$regex": query.name, "$options": "i" } });
+      } else if (query.city) {
+        places = await Place.find({ city: { "$regex": query.city, "$options": "i" } });
+      } else {
+        places = await Place.find();
+      }
+      return { status: true, result: places };
+    } catch (e) {
+      return { status: false, result: { message: e.message } };
+    }
+  };
 
 
 
@@ -45,5 +63,7 @@ const createPlace = async (place) => {
 
 module.exports = {
     createPlace,
+    placesList,
+    getPlace
 
 }
