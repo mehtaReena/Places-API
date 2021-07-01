@@ -25,7 +25,7 @@ const getPlace= async (slug) => {
 
 const createPlace = async (place) => {
     console.log(place)
-    let slug = place.name.replace(" ", "-") + "-" + nanoid(6);
+    let slug = place.name.replace(" ", "-") + "-" + nanoid(5);
     let newPlace = new Place({ ...place, slug });
     try {
       newPlace.save();
